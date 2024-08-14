@@ -41,18 +41,19 @@
     </div>
 
     <script>
-        var temperatureSocket = new WebSocket(
-            'ws://' + window.location.host + '/ws/temperatures/'
-        );
+        function fetchTemperature() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/temperatures/', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    document.getElementById('temperature').innerText = data.temperature + ' °C';
+                }
+            };
+            xhr.send();
+        }
 
-        temperatureSocket.onmessage = function(e) {
-            var data = JSON.parse(e.data);
-            document.getElementById('temperature').innerText = data.temperature + ' °C';
-        };
-
-        temperatureSocket.onclose = function(e) {
-            console.error('WebSocket closed unexpectedly');
-        };
+        setInterval(fetchTemperature, 5000); // Poll every 5 seconds
     </script>
 </body>
 </html>
