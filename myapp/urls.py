@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TemperatureDetailView,  TemperatureListView, TemperatureCreateAPIView, LatestTemperatureAPIView, temperature_monitor
+from .views import TemperatureDetailView, TemperatureListView, TemperatureCreateAPIView, LatestTemperatureAPIView, temperature_monitor
 
 urlpatterns = [
     path('temperatures/', TemperatureListView.as_view(), name='temperature-list'),
