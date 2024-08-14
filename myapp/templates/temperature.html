@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperature and Humidity Display</title>
+    <title>Temperature Display</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #e6f7e6; /* Light green background */
             color: #006400; /* Dark green text color */
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            text-align: center;
         }
 
-        .data-display {
+        #temperature {
             display: inline-block;
             padding: 20px 40px;
             border-radius: 50px;
@@ -27,34 +25,30 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            margin: 10px;
         }
 
-        .timestamp {
-            font-size: 18px;
-            color: #006400;
-            margin-top: 20px;
+        div {
+            text-align: center;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="data-display" id="temperature">-- °C</div>
-    <div class="data-display" id="humidity">-- %</div>
-    <div class="timestamp" id="timestamp">Last Updated: --</div>
+    <div>
+        <span id="temperature">-- °C</span>
+    </div>
 
     <script>
-        function fetchData() {
-            fetch('/api/latest-data/')
+        function fetchTemperature() {
+            fetch('/api/latest-temperature/')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('temperature').innerText = data.temperature + ' °C';
-                document.getElementById('humidity').innerText = data.humidity + ' %';
-                document.getElementById('timestamp').innerText = 'Last Updated: ' + data.timestamp;
             });
         }
 
-        // Fetch data every 2 seconds
-        setInterval(fetchData, 2000);
+        // Fetch temperature every 2 seconds
+        setInterval(fetchTemperature, 2000);
     </script>
 </body>
 </html>
