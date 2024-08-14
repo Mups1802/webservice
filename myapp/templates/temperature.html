@@ -10,11 +10,12 @@
             background-color: #e6f7e6; /* Light green background */
             color: #006400; /* Dark green text color */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         #temperature {
@@ -25,11 +26,44 @@
             color: white;
             font-size: 24px;
             font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #toggleButton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            background: #32CD32; /* Green background */
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        #toggleButton.dark {
+            background: #333; /* Dark mode background */
+            color: #fff; /* Dark mode text color */
+        }
+
+        #toggleButton.light {
+            background: #32CD32; /* Light mode background */
+            color: #fff; /* Light mode text color */
+        }
+
+        body.dark-mode {
+            background-color: #333; /* Dark mode background */
+            color: #fff; /* Dark mode text color */
+        }
+
+        body.light-mode {
+            background-color: #e6f7e6; /* Light green background */
+            color: #006400; /* Dark green text color */
         }
     </style>
 </head>
-<body>
+<body class="light-mode">
     <div id="temperature">-- °C</div>
+    <button id="toggleButton" class="light">Toggle Dark/Light Mode</button>
 
     <script>
         function fetchTemperature() {
@@ -46,6 +80,22 @@
 
         // Fetch temperature on page load
         fetchTemperature();
+
+        // Toggle dark/light mode
+        const toggleButton = document.getElementById('toggleButton');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.replace('light-mode', 'dark-mode');
+                toggleButton.classList.replace('light', 'dark');
+                toggleButton.textContent = 'Toggle Light Mode';
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+                toggleButton.classList.replace('dark', 'light');
+                toggleButton.textContent = 'Toggle Dark Mode';
+            }
+        });
     </script>
 </body>
 </html>
