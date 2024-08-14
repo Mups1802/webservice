@@ -18,15 +18,13 @@
 
         #temperature {
             display: inline-block;
-            width: 100px;
-            height: 100px;
-            line-height: 100px;
-            text-align: center;
-            border-radius: 50%;
-            background-color: #32CD32; /* Lime green background */
+            padding: 20px 40px;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #a8e6a1, #32CD32); /* Gradient from lighter green to darker green */
             color: white;
             font-size: 24px;
             font-weight: bold;
+            text-align: center;
         }
 
         div {
@@ -37,7 +35,7 @@
 </head>
 <body>
     <div>
-        Temperature: <span id="temperature">--</span>
+        <span id="temperature">-- °C</span>
     </div>
 
     <script>
@@ -51,6 +49,6 @@
 
         // Fetch temperature every 2 seconds
         setInterval(fetchTemperature, 2000);
-    </script>
+    </script>
 </body>
 </html>
