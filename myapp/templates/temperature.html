@@ -42,18 +42,15 @@
 
     <script>
         function fetchTemperature() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/temperatures/', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var data = JSON.parse(xhr.responseText);
-                    document.getElementById('temperature').innerText = data.temperature + ' °C';
-                }
-            };
-            xhr.send();
+            fetch('/api/latest-temperature/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('temperature').innerText = data.temperature + ' °C';
+            });
         }
 
-        setInterval(fetchTemperature, 5000); // Poll every 5 seconds
-    </script>
+        // Fetch temperature every 2 seconds
+        setInterval(fetchTemperature, 2000);
+    </script>
 </body>
 </html>
