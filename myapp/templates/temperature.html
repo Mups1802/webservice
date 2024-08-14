@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             background-color: #e6f7e6; /* Light green background */
             color: #006400; /* Dark green text color */
-            display: inline-block;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -18,13 +18,15 @@
 
         #temperature {
             display: inline-block;
-            padding: 20px 40px;
-            border-radius: 50px;
-            background: linear-gradient(90deg, #a8e6a1, #32CD32); /* Gradient from lighter green to darker green */
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #32CD32; /* Lime green background */
             color: white;
             font-size: 24px;
             font-weight: bold;
-            text-align: center;
         }
 
         div {
@@ -35,7 +37,7 @@
 </head>
 <body>
     <div>
-        <span id="temperature">-- °C</span>
+        Temperature: <span id="temperature">--</span>
     </div>
 
     <script>
