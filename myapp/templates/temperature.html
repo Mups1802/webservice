@@ -57,7 +57,7 @@
 
     <script>
         function fetchSensorData() {
-            fetch('/api/latest-environment/')
+            fetch('/api/latest-temperature/', '/api/latest-humidity/')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('temperature').innerText = 'Temperature: ' + data.temperature + ' °C';
