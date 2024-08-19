@@ -27,7 +27,7 @@ class LatestTemperatureAPIView(APIView):
     def get(self, request):
         latest_temperature = Temperature.objects.latest('id')
         return Response({"temperature": latest_temperature.data})
-class LatestHumidityTemperatureAPIView(APIView):
+class LatestHumidityAPIView(APIView):
     def get(self, request):
         latest_humidity = Humidity.objects.latest('id')
         return Response({"humidity": latest_humidity.data})
