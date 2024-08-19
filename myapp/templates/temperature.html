@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperature Display</title>
+    <title>Environment Display</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,10 +15,9 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            transition: background-color 0.3s, color 0.3s;
         }
 
-        #temperature {
+        .sensor-data {
             display: inline-block;
             padding: 15px 30px;
             border-radius: 25px;
@@ -29,73 +28,35 @@
             margin-bottom: 20px;
         }
 
-        #toggleButton {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            background: #32CD32; /* Green background */
-            color: white;
-            transition: background-color 0.3s;
+        #temperature {
+            margin-bottom: 10px;
         }
 
-        #toggleButton.dark {
-            background: #333; /* Dark mode background */
-            color: #fff; /* Dark mode text color */
-        }
-
-        #toggleButton.light {
-            background: #32CD32; /* Light mode background */
-            color: #fff; /* Light mode text color */
-        }
-
-        body.dark-mode {
-            background-color: #333; /* Dark mode background */
-            color: #fff; /* Dark mode text color */
-        }
-
-        body.light-mode {
-            background-color: #e6f7e6; /* Light green background */
-            color: #006400; /* Dark green text color */
+        #humidity {
+            margin-bottom: 10px;
         }
     </style>
 </head>
-<body class="light-mode">
-    <div id="temperature">-- °C</div>
-    <button id="toggleButton" class="light">Toggle Dark/Light Mode</button>
+<body>
+    <div id="temperature" class="sensor-data">Temperature: -- °C</div>
+    <div id="humidity" class="sensor-data">Humidity: -- %</div>
 
     <script>
-        function fetchTemperature() {
-            fetch('/api/latest-temperature/')
+        function fetchSensorData() {
+            fetch('/api/latest-environment/')
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('temperature').innerText = data.temperature + ' °C';
+                    document.getElementById('temperature').innerText = 'Temperature: ' + data.temperature + ' °C';
+                    document.getElementById('humidity').innerText = 'Humidity: ' + data.humidity + ' %';
                 })
-                .catch(error => console.error('Error fetching temperature:', error));
+                .catch(error => console.error('Error fetching sensor data:', error));
         }
 
-        // Fetch temperature every 2 seconds
-        setInterval(fetchTemperature, 2000);
+        // Fetch sensor data every 2 seconds
+        setInterval(fetchSensorData, 2000);
 
-        // Fetch temperature on page load
-        fetchTemperature();
-
-        // Toggle dark/light mode
-        const toggleButton = document.getElementById('toggleButton');
-        const body = document.body;
-
-        toggleButton.addEventListener('click', () => {
-            if (body.classList.contains('light-mode')) {
-                body.classList.replace('light-mode', 'dark-mode');
-                toggleButton.classList.replace('light', 'dark');
-                toggleButton.textContent = 'Toggle Light Mode';
-            } else {
-                body.classList.replace('dark-mode', 'light-mode');
-                toggleButton.classList.replace('dark', 'light');
-                toggleButton.textContent = 'Toggle Dark Mode';
-            }
-        });
+        // Fetch sensor data on page load
+        fetchSensorData();
     </script>
 </body>
 </html>
