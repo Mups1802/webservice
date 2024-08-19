@@ -4,6 +4,9 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from .models import Temperature
 from .serializer import TemperatureSerializer
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json 
 
 class TemperatureDetailView(generics.RetrieveAPIView):
     queryset = Temperature.objects.all()
