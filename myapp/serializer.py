@@ -5,9 +5,9 @@ from .models import Temperature, Humidity
 class TemperatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Temperature
-        fields = ['temperature']
+        fields = ['Temperature']
 
 class HumiditySerializer(serializers.ModelSerializer):
     class Meta:
         model = Humidity
-        fields = ['humidity']
+        fields = ['Humidity']
