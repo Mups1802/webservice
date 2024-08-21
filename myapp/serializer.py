@@ -1,13 +1,7 @@
 from rest_framework import serializers
-from .models import Temperature, Humidity
+from .models import TemperatureReading
 
-
-class TemperatureSerializer(serializers.ModelSerializer):
+class TemperatureReadingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Temperature
-        fields = ['data']
-
-class HumiditySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Humidity
-        fields = ['data']
+        model = TemperatureReading
+        fields = ['id', 'timestamp', 'temperature', 'humidity']
